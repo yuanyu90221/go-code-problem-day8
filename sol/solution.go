@@ -20,17 +20,18 @@ func BFT(root *TreeNode, k int) int {
 	refMap := make(map[int]*Node)
 	head := &Node{Val: root.Val}
 	refMap[root.Val] = head
+	count := 0
 	for len(queue) != 0 {
 		visit := queue[0]
-		visitRoot := &TreeNode{Val: -999999} // root value
+		visitRoot := &TreeNode{} // root value
 		if len(rootQueue) > 0 {
 			visitRoot = rootQueue[0]
 			rootQueue = append(rootQueue[1:])
 		}
+		count++
 		queue = append(queue[1:])
-		fmt.Println("visit", visit.Val, "visitRoot", visitRoot.Val)
-		if visitRoot.Val != -999999 {
-			fmt.Println(visitRoot.Val, visit.Val)
+		if count != 1 {
+			// fmt.Println(visitRoot.Val, visit.Val)
 			visitNode := &Node{Val: visit.Val}
 			refMap[visit.Val] = visitNode
 			if visitRoot.Val > visit.Val {
